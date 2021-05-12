@@ -1,0 +1,749 @@
+@import "variable";
+
+@mixin shine {
+ 
+    background-color: $yellowColor;
+    box-Shadow: 0 0 10px $yellowColor, 0 0 40px $yellowColor, 0 0 80px $yellowColor;
+}
+
+@mixin btn{
+    letter-spacing: 2px;
+    border-radius: .3rem;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 0;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover{
+        border: none;
+    }
+}
+
+
+
+// book
+@mixin face_button{
+  
+
+  #face {
+    width: 5.125rem;
+    height: 2.75rem;
+    margin:  0 0 10px 0;
+    grid-area: main;
+    align-self: center;
+    justify-self: center;
+    .toggle {
+      position: absolute;
+      width: 5.125rem;
+      user-select: none;
+      left:10%;
+    }
+    
+    [type="checkbox"] {
+      display: none;
+    }
+    
+  }
+  
+
+  .check-label {
+    display: block;
+    width: 5.125rem;
+    height: 2.75rem;
+    border: none;
+    border-radius: 3rem;
+    background: #d7d7d7;
+    cursor: pointer;
+    overflow: hidden;
+    .face {
+      display: block;
+      position: absolute;
+      content: '';
+      top: 0.225rem;
+      bottom: 0;
+      right: 2.625rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      margin: 0;
+      border: none;
+      border-radius: 3rem;
+      background: linear-gradient(45deg, $grey_face 0%, #fff 70%);
+      transition: all 0.45s ease-in-out;
+      overflow: hidden;
+    }
+  }
+  
+  [type="checkbox"] {
+    + .check-label #background {
+      width: inherit;
+      height: inherit;
+      border: none;
+      border-radius: inherit;
+      background: -webkit-gradient(linear, right top, left top, from($yellowColor), to($yellowColor2));
+      background: -webkit-linear-gradient(right, $yellowColor, $yellowColor2);
+      background: -o-linear-gradient(right, $yellowColor, $yellowColor2);
+      background: linear-gradient(to left, $yellowColor, $yellowColor2);
+      opacity: 0;
+      transition: all 0.45s ease-in-out;
+    }
+    &:checked + .check-label #background {
+      opacity: 1;
+    }
+  }
+  
+  .face-container {
+    position: absolute;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  
+  .face {
+    box-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.25);
+  }
+  
+  .eye {
+    position: absolute;
+    top: 1.125rem;
+    height: 0.125rem;
+    width: 0.3125rem;
+    background: $grey_back;
+    border-radius: 0 0 100% 50%;
+    &.left {
+      left: 0.375rem;
+    }
+    &.right {
+      left: 1.0625rem;
+    }
+  }
+  
+  .mouth {
+    position: absolute;
+    top: 1.5625rem;
+    left: 0.725rem;
+    width: 0.2375rem;
+    height: 0.125rem;
+    background: $grey_back;
+    border-radius: 40% 40% 100% 50%;
+  }
+  
+  [type="checkbox"] {
+    &:checked {
+      + .check-label .face {
+        right: 0.3rem;
+        .face-container {
+          animation: rotateElement forwards 0.3s;
+        }
+        .eye {
+          &.left, &.right {
+            animation: changeFace forwards 0.3s 0.075s;
+          }
+        }
+        .mouth {
+          animation: changeMouth forwards 0.3s 0.075s;
+        }
+      }
+      + .check-label .face .eye {
+        &.left {
+          left: 0.5rem;
+        }
+        &.right {
+          left: 1.25rem;
+        }
+      }
+    }
+    + .check-label .face {
+      .face-container {
+        animation: rotateElementReverse forwards 0.3s;
+      }
+      .eye {
+        &.left, &.right {
+          animation: changeFaceReverse forwards 0.3s;
+        }
+      }
+      .mouth {
+        animation: changeMouthReverse forwards 0.3s;
+      }
+    }
+  }
+
+  
+  
+  @keyframes rotateElement {
+    0% {
+      left: 0;
+    }
+  
+    25% {
+      left: 2rem;
+    }
+  
+    30% {
+      opacity: 0;
+    }
+  
+    50% {
+      opacity: 0;
+      left: -2rem;
+    }
+  
+    90% {
+      opacity: 1;
+    }
+  
+    100% {
+      left: 0.5rem;
+      opacity: 1;
+    }
+  }
+  
+  
+
+  
+  @keyframes changeFace {
+    100% {
+      top: 0.85rem;
+      width: 0.1875rem;
+      height: 0.1875rem;
+      background: $grey_back;
+      border: none;
+      border-radius: 100%;
+    }
+  }
+  
+
+  @keyframes changeMouth {
+    100% {
+      top: 1.275rem;
+      left: 0.5625rem;
+      height: 0.3125rem;
+      width: 0.8125rem;
+      background: $grey_back;
+      background-image: -webkit-gradient(linear, left top, left bottom, from($grey_back), to($grey_back2));
+      background-image: -webkit-linear-gradient(top, $grey_back , $grey_back2);
+      background-image: -o-linear-gradient(top, $grey_back, $grey_back2);
+      background-image: linear-gradient(to bottom, $grey_back, $grey_back2);
+      border-radius: 0.2rem 0.2rem 1rem 1rem;
+    }
+  }
+  
+ 
+  
+  
+  @keyframes rotateElementReverse {
+    0% {
+      left: 0;
+    }
+  
+    25% {
+      left: -2rem;
+    }
+  
+    30% {
+      opacity: 0;
+    }
+  
+    50% {
+      opacity: 0;
+      left: 2rem;
+    }
+  
+    90% {
+      opacity: 1;
+    }
+  
+    100% {
+      left: 0;
+      opacity: 1;
+    }
+  }
+  
+  
+
+  @keyframes changeFaceReverse {
+    0% {
+      top: 0.85rem;
+      width: 0.1875rem;
+      height: 0.1875rem;
+      border: none;
+      border-radius: 100%;
+      background: $grey_back;
+    }
+  }
+  
+
+  
+  
+  @keyframes changeMouthReverse {
+    0% {
+      top: 1.275rem;
+      left: 0.45rem;
+      height: 0.3125rem;
+      width: 0.8125rem;
+      background: $grey_back;
+      background-image: -webkit-gradient(linear, left top, left bottom, from($grey_back), to($grey_back2));
+      background-image: -webkit-linear-gradient(top, $grey_back, $grey_back2);
+      background-image: -o-linear-gradient(top, $grey_back, $grey_back2);
+      background-image: linear-gradient(to bottom, $grey_back, $grey_back2);
+      border: none;
+      border-radius: 0.2rem 0.2rem 1rem 1rem;
+    }
+  
+    25% {
+      left: 0.5625rem;
+    }
+  }
+}
+@mixin checkbox{
+  .checkboxes {
+    width: 80%;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+    background: red;
+  }
+   
+  
+  .check input {
+    display: none;
+  }
+  .check input:checked + label .box {
+    animation: animOnTransform 1s 1 forwards;
+    background: rgba(230, 230, 0, 0.5);
+  }
+  .check input:checked + label .box i {
+    transform: translate(-50%, -50%) scale(1);
+    transition-duration: 200ms;
+    transition-delay: 400ms;
+    opacity: 1;
+  }
+  .check label {
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    min-height: 60px;
+    cursor: pointer;
+  }
+  .box i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    display: inline-block;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    transition-delay: 200ms;
+    transform: translate(-50%, -50%) scale(4);
+  }
+  .check label .box {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    transition:  300ms ease;
+
+  }
+  .check label .box:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes animOn {
+    40% {
+      height: 20px;
+      width: 100px;
+    }
+    50% {
+      height: 60px;
+      width: 30px;
+    }
+    60% {
+      height: 40px;
+      width: 70px;
+    }
+    70% {
+      height: 55px;
+      width: 45px;
+    }
+    100% {
+      height: 50px;
+      width: 50px;
+    }
+  }
+
+  @keyframes animOnTransform {
+    40% {
+      transform: scale(1.5, 0.5);
+    }
+    50% {
+      transform: scale(0.5, 1.5);
+    }
+    60% {
+      transform: scale(1.3, 0.6);
+    }
+    70% {
+      transform: scale(0.8, 1.2);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+}
+
+@mixin link{
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 4px;
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+@mixin border{
+    @include link;
+    &:hover{
+        color:#000;
+        transition-delay:1s;
+        @include shine;
+    }
+
+    span {
+        position: absolute;
+        display: block;
+    }
+
+
+    span:nth-child(1){
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, $yellowColor);
+    }
+
+    &:hover span:nth-child(1) {
+        left: 100%;
+        transition: 1s;
+    }
+    
+    span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, $yellowColor);
+    }
+    
+    &:hover span:nth-child(3) {
+        right: 100%;
+        transition: 1s;
+        transition-delay: 0.5s;
+    }
+    
+    span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        height: 100%;
+        width: 2px;
+        background: linear-gradient(180deg, transparent, $yellowColor)
+    }
+    
+    &:hover span:nth-child(2) {
+        top: 100%;
+        transition: 1s;
+        transition-delay: 0.25s;
+    }
+    
+    span:nth-child(4){
+        bottom: -100%;
+        left: 0;
+        height: 100%;
+        width: 2px;
+        background: linear-gradient(360deg, transparent, $yellowColor)
+    }
+    
+    &:hover span:nth-child(4){
+        bottom: 100%;
+        transition: 1s;
+        transition-delay: 0.75s;
+    }
+}
+
+
+
+@mixin titleDeco{
+    p{
+        margin: auto;
+        font-size: 20px;
+        color: $yellowColor;
+        font-weight: bold;
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+    }
+
+    p::after {
+        content: '';
+        width: 50px;
+        height: 35px;
+        background: linear-gradient( rgba(204, 204, 0,0.9), rgba(255, 255, 255, 0.5));
+        position: absolute;
+        top: -20px;
+        left: 0;
+        z-index: -1;
+        transform: rotate(10deg);
+        border-top-left-radius: 35px;
+        border-bottom-right-radius: 35px;
+    }
+
+    h1{
+        margin: auto;
+        font-size: 50px;
+        color: #000;
+    }
+}
+
+@mixin animation{
+    .img_c1 {
+        position: relative;
+        animation: down1 2s linear 0.2s infinite alternate;
+    }
+    .img_c2 {
+        position: relative;
+        animation: down2 2s linear 0.2s infinite alternate;
+        z-index: 1;
+    }
+    .img_c3 {
+        position: relative;
+        animation: down3 2s linear 0.2s infinite alternate;
+    }
+    
+    @keyframes down1 {
+        0% {
+            top: 0px;
+        }
+        50% {
+            top: 50px;
+        }
+        100% {
+            top: 0px;
+        }
+    }
+    @keyframes down2 {
+        0% {
+            top: 0px;
+        }
+        50% {
+            top: 40px;
+        }
+        100% {
+            top: 0px;
+        }
+    }
+    @keyframes down3 {
+        0% {
+            top: 0px;
+        }
+        50% {
+            top: 30px;
+        }
+        100% {
+            top: 0px;
+        }
+    }
+    .img_c4 {
+        position: relative;
+        animation: up1 2s linear 0.2s infinite alternate;
+    }
+    .img_c5 {
+        position: relative;
+        animation: up2 2s linear 0.2s infinite alternate;
+    }
+    .img_c6 {
+        position: relative;
+        animation: up3 2s linear 0.2s infinite alternate;
+    }
+    
+    @keyframes up1 {
+        0% {
+            bottom: 0px;
+        }
+        50% {
+            bottom: 30px;
+        }
+        100% {
+            bottom: 0px;
+        }
+    }
+    @keyframes up2 {
+        0% {
+            bottom: 0px;
+        }
+        50% {
+            bottom: 60px;
+        }
+        100% {
+            bottom: 0px;
+        }
+    }
+    @keyframes up3 {
+        0% {
+            bottom: 0px;
+        }
+        50% {
+            bottom: 75px;
+        }
+        100% {
+            bottom: 0px;
+        }
+    }
+    
+}
+
+
+@mixin entre
+ {
+    width: 100%;
+    color: #000;
+    padding-top: 20px;
+    border: none;
+    outline: none;
+    background: none;   
+    &:focus + .label-name::after ,
+    &:valid + .label-name {
+    transform: translateX(0%);
+    }
+}
+
+
+@mixin for-col{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    
+    label{
+        position: absolute;
+        bottom: 0px;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom : 2px solid #000;
+        font-weight:bold;
+        color: #000;
+        background:none;
+    }
+
+    label::after{
+        content: "";
+        position: absolute;
+
+        left: 0px;
+        bottom: -2px;
+        width: 100%;
+        border-bottom: 4px solid rgba(227, 254, 107);;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        padding-bottom: 15px;
+    }
+
+    .content-name{
+        position: absolute;
+        bottom: 20px;
+        left: 0px ;
+        transition: all 0.3s ease;
+    }
+}
+
+
+@mixin mQ($arg...) {
+    @if length($arg) == 1 {
+        @media screen and (max-width: nth($arg, 1)) {
+        @content;
+        }
+    }
+    @if length($arg) == 2 {
+        @media screen and (max-width: nth($arg, 1)) and (min-width: nth($arg , 2)){
+        @content;
+        }
+    }
+    
+}
+
+@mixin hamburger{
+    .hamburger{
+        position: absolute;
+        right : 15%;
+        margin:2%;
+    }
+    .menu-btn {
+        position: absolute;
+        display: flex;
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+        
+      }
+      .menu-btn__burger {
+        position:fixed;
+        top: 50px;
+        width: 40px;
+        height: 5px;
+        background: $yellowColor;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(255,101,47,.2);
+        transition: all .5s ease-in-out;
+      }
+      .menu-btn__burger::before,
+      .menu-btn__burger::after {
+        content: '';
+        position: fixed;
+        top: 50px;
+        width: 40px;
+        height: 5px;
+        background: $yellowColor;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(255,101,47,.2);
+        transition: all .5s ease-in-out;
+      }
+      .menu-btn__burger::before {
+        transform: translateY(-16px);
+      }
+      .menu-btn__burger::after {
+        transform: translateY(16px);
+      }
+      /* ANIMATION */
+      .menu-btn.open .menu-btn__burger {
+        transform: translateX(0px);
+        background: transparent;
+        box-shadow: none;
+        top : 0;
+      }
+
+      .menu-btn.open .menu-btn__burger::before {
+        transform: rotate(45deg) translate(35px, -35px);
+      }
+      .menu-btn.open .menu-btn__burger::after {
+        transform: rotate(-45deg) translate(35px, 35px);
+      }
+    
+    
+      .nav-links.translation {
+        transform: translateX(0%);
+      }
+      @keyframes navLinkFade {
+        from{
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+}
